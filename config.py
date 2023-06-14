@@ -2,7 +2,7 @@
 API_KEY = "sk-此处填API密钥"    # 可同时填写多个API-KEY，用英文逗号分割，例如API_KEY = "sk-openaikey1,sk-openaikey2,fkxxxx-api2dkey1,fkxxxx-api2dkey2"
 
 # [step 2]>> 改为True应用代理，如果直接在海外服务器部署，此处不修改
-USE_PROXY = False
+USE_PROXY = True
 if USE_PROXY:
     # 填写格式是 [协议]://  [地址] :[端口]，填写之前不要忘记把USE_PROXY改成True，如果直接在海外服务器部署，此处不修改
     # 例如    "socks5h://localhost:11284"
@@ -13,8 +13,10 @@ if USE_PROXY:
     # 代理网络的地址，打开你的*学*网软件查看代理的协议(socks5/http)、地址(localhost)和端口(11284)
     proxies = {
         #          [协议]://  [地址]  :[端口]
-        "http":  "socks5h://localhost:11284",  # 再例如  "http":  "http://127.0.0.1:7890",
-        "https": "socks5h://localhost:11284",  # 再例如  "https": "http://127.0.0.1:7890",
+        #"http":  "socks5h://localhost:11284",  # 再例如  "http":  "http://127.0.0.1:7890",
+        #"https": "socks5h://localhost:11284",  # 再例如  "https": "http://127.0.0.1:7890",
+        "http": "http://127.0.0.1:1080",
+        "https": "http://127.0.0.1:1080",
     }
 else:
     proxies = None
@@ -45,8 +47,9 @@ WEB_PORT = -1
 MAX_RETRY = 2
 
 # 模型选择是 (注意: LLM_MODEL是默认选中的模型, 同时它必须被包含在AVAIL_LLM_MODELS切换列表中 )
-LLM_MODEL = "gpt-3.5-turbo" # 可选 ↓↓↓
-AVAIL_LLM_MODELS = ["gpt-3.5-turbo-16k", "gpt-3.5-turbo", "api2d-gpt-3.5-turbo", "gpt-4", "api2d-gpt-4", "chatglm", "moss", "newbing", "newbing-free", "stack-claude"]
+# LLM_MODEL = "gpt-3.5-turbo" # 可选 ↓↓↓
+LLM_MODEL = "ohmygpt-gpt-3.5-turbo"
+AVAIL_LLM_MODELS = ["gpt-3.5-turbo-16k", "gpt-3.5-turbo", "api2d-gpt-3.5-turbo", "gpt-4", "api2d-gpt-4", "ohmygpt-gpt-3.5-turbo", "chatglm", "moss", "newbing", "newbing-free", "stack-claude"]
 # P.S. 其他可用的模型还包括 ["newbing-free", "jittorllms_rwkv", "jittorllms_pangualpha", "jittorllms_llama"]
 
 # 本地LLM模型如ChatGLM的执行方式 CPU/GPU

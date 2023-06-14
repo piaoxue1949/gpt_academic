@@ -51,6 +51,7 @@ class LazyloadTiktoken(object):
 API_URL_REDIRECT, = get_conf("API_URL_REDIRECT")
 openai_endpoint = "https://api.openai.com/v1/chat/completions"
 api2d_endpoint = "https://openai.api2d.net/v1/chat/completions"
+ohmygpt_endpoint = "https://api.ohmygpt.com/v1/chat/completions"
 newbing_endpoint = "wss://sydney.bing.com/sydney/ChatHub"
 # 兼容旧版的配置
 try:
@@ -135,6 +136,14 @@ model_info = {
         "fn_with_ui": newbing_ui,
         "fn_without_ui": newbing_noui,
         "endpoint": newbing_endpoint,
+        "max_token": 4096,
+        "tokenizer": tokenizer_gpt35,
+        "token_cnt": get_token_num_gpt35,
+    },
+    "ohmygpt-gpt-3.5-turbo": {
+        "fn_with_ui": chatgpt_ui,
+        "fn_without_ui": chatgpt_noui,
+        "endpoint": ohmygpt_endpoint,
         "max_token": 4096,
         "tokenizer": tokenizer_gpt35,
         "token_cnt": get_token_num_gpt35,

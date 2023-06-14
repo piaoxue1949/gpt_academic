@@ -499,6 +499,12 @@ def is_api2d_key(key):
     else:
         return False
 
+def is_ohmygpt_key(key):
+    if key.startswith('sk') and len(key) == 51:
+        return True
+    else:
+        return False
+
 def is_any_api_key(key):
     if ',' in key:
         keys = key.split(',')
@@ -534,6 +540,10 @@ def select_api_key(keys, llm_model):
     if llm_model.startswith('api2d-'):
         for k in key_list:
             if is_api2d_key(k): avail_key_list.append(k)
+
+    if llm_model.startswith('ohmygpt-'):
+        for k in key_list:
+            if is_ohmygpt_key(k): avail_key_list.append(k)
 
     if len(avail_key_list) == 0:
         raise RuntimeError(f"您提供的api-key不满足要求，不包含任何可用于{llm_model}的api-key。您可能选择了错误的模型或请求源。")
@@ -824,4 +834,3 @@ def objload(file='objdump.tmp'):
         return
     with open(file, 'rb') as f:
         return pickle.load(f)
-    

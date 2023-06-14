@@ -155,7 +155,7 @@ def predict(inputs, llm_kwargs, plugin_kwargs, chatbot, history=[], system_promp
             endpoint = model_info[llm_kwargs['llm_model']]['endpoint']
             response = requests.post(endpoint, headers=headers, proxies=proxies,
                                     json=payload, stream=True, timeout=TIMEOUT_SECONDS);break
-        except:
+        except Exception as e:
             retry += 1
             chatbot[-1] = ((chatbot[-1][0], timeout_bot_msg))
             retry_msg = f"，正在重试 ({retry}/{MAX_RETRY}) ……" if MAX_RETRY > 0 else ""
@@ -267,7 +267,7 @@ def generate_payload(inputs, llm_kwargs, history, system_prompt, stream):
     messages.append(what_i_ask_now)
 
     payload = {
-        "model": llm_kwargs['llm_model'].strip('api2d-'),
+        "model": llm_kwargs['llm_model'].strip('api2d-').replace("ohmygpt-", ""),
         "messages": messages, 
         "temperature": llm_kwargs['temperature'],  # 1.0,
         "top_p": llm_kwargs['top_p'],  # 1.0,
